@@ -7,10 +7,6 @@
 
 import Foundation
 
-struct ChoosenTheme {
-    let choosenTheme: String
-}
-
 struct NewsFeed: Decodable {
     let status: String
     let articles: [Articles]

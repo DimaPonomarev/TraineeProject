@@ -18,30 +18,30 @@ struct  APINewsFeed {
     
     init(theme: String) {
         self.theme = theme
-        self.path = "v2/everything?q=\(theme)&from=2023-07-14&sortBy=publishedAt&apiKey=\(self.APIKey)"
+        self.path = "v2/everything?q=\(theme)&from=2023-08-21&sortBy=publishedAt&apiKey=\(self.APIKey)"
     }
 }
 
-struct ChoosenThemee  {
+struct ChoosenTheme  {
     let theme: String
 }
 
 final class APINewsFeedRequest: DataFetcherProtocol {
     
-    public func getWeather(choosenTheme:ChoosenThemee, complition: @escaping ((Result<Any>) -> Void)) {
+    public func getWeather(choosenTheme:ChoosenTheme, complition: @escaping ((Result<Any>) -> Void)) {
         makeDataTask(urlRequest: makeURLRequest(choosenTheme: choosenTheme), type: NewsFeed.self, complitionHandler: complition)
     }
 }
 
 private extension APINewsFeedRequest {
     
-    func makeURL(choosenTheme: ChoosenThemee) -> URL? {
+    func makeURL(choosenTheme: ChoosenTheme) -> URL? {
         let urlString = "\(APINewsFeed.baseURL)\(APINewsFeed(theme: choosenTheme.theme).path)"
         let url = URL(string: urlString)
         return url
     }
     
-    func makeURLRequest(choosenTheme: ChoosenThemee) -> URLRequest? {
+    func makeURLRequest(choosenTheme: ChoosenTheme) -> URLRequest? {
         guard let url = makeURL(choosenTheme: choosenTheme) else { return nil }
         let urlRequest = URLRequest(url: url)
         return urlRequest

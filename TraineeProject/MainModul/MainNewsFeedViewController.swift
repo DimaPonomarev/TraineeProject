@@ -31,7 +31,7 @@ final class MainNewsFeedViewController: UIViewController {
         super.viewDidLoad()
         setupUI()
         selfConfigurate()
-        presenter?.makeRequestToInteractor(choosenTheme: "economic")
+        presenter?.makeRequest(choosenTheme: "economic")
     }
 }
 
@@ -79,7 +79,7 @@ private extension MainNewsFeedViewController {
     }
     
     @objc func refresh() {
-        presenter?.makeRequestToInteractor(choosenTheme: "economic")
+        presenter?.makeRequest(choosenTheme: "economic")
     }
 }
 

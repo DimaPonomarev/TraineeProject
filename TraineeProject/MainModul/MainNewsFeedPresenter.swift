@@ -10,12 +10,12 @@ import Foundation
 protocol MainNewsFeedPresentationProtocol: AnyObject {
     
     var view: MainNewsFeedViewControllerProtocol? { get set }
-    func getResponseFromInteractor(newsFeed: NewsFeed)
-    func makeRequestToInteractor(choosenTheme: String)
+    func getResponseFromNetwork(newsFeed: NewsFeed)
+    func makeRequest(choosenTheme: String)
     var modelForTableView: [NewsFeed.Articles]? { get set }
     var router: MainNewsFeedRouterProtocol? { get }
     func openDescriptionVC(model: NewsFeed.Articles)
-    func getErrorFromInteractor(_ error: Error)
+    func getErrorFromNetwork(_ error: Error)
 }
 
 final class MainNewsFeedPresenter: MainNewsFeedPresentationProtocol {
@@ -32,21 +32,21 @@ final class MainNewsFeedPresenter: MainNewsFeedPresentationProtocol {
     
     // MARK: - Delegate Methods
 
-    func getResponseFromInteractor(newsFeed: NewsFeed) {
+    func getResponseFromNetwork(newsFeed: NewsFeed) {
         modelForTableView = newsFeed.articles
         view?.passedDataFromPresenterToViewController(newsFeed: newsFeed)
     }
     
     //    MARK: - tell to Router to open AlertController with Error
     
-    func getErrorFromInteractor(_ error: Error) {
+    func getErrorFromNetwork(_ error: Error) {
         router?.initAlert(withError: error)
         
     }
     
     //    MARK: - makeRequestToInteractor
 
-    func makeRequestToInteractor(choosenTheme: String) {
+    func makeRequest(choosenTheme: String) {
         interactor?.makeRequest(theme: choosenTheme)
     }
     

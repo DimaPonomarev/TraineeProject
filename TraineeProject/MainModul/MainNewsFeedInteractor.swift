@@ -16,15 +16,15 @@ final class MainNewsFeedInteractor: MainNewsFeedInteractorProtocol {
     let api = APINewsFeedRequest()
     
     func makeRequest(theme: String) {
-        api.getWeather(choosenTheme: ChoosenThemee(theme: theme)) { [weak self] (result) in
+        api.getWeather(choosenTheme: ChoosenTheme(theme: theme)) { [weak self] (result) in
             DispatchQueue.main.async {
                 guard let self = self else { return }
                 switch result {
                 case .succes(let result):
-                    self.presenter?.getResponseFromInteractor(newsFeed: result as! NewsFeed)
+                    self.presenter?.getResponseFromNetwork(newsFeed: result as! NewsFeed)
                     
                 case .failure(let error):
-                    self.presenter?.getErrorFromInteractor(error)
+                    self.presenter?.getErrorFromNetwork(error)
                     print(error)
                     
                 }
